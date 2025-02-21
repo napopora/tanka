@@ -41,7 +41,7 @@ body {
   font-family: "Shippori Mincho", serif;
   writing-mode: vertical-rl;
   text-orientation: upright;
-  font-size: clamp(0.5rem, calc(2.5vh + 0.1rem), 1rem);
+  font-size: clamp(0.8rem, calc(2vh + 0.1rem), 4vh);
   letter-spacing: clamp(0.1rem, calc(0.3vh), 0.3rem);
   margin: 0 auto;
   white-space: nowrap;
