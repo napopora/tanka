@@ -756,7 +756,7 @@ const tankaCollection = [
     date: "2024/4/7",
   },
   {
-    text: "ご注文の「牛：三頭」はさきほど来年に届くと伝えました",
+    text: "ご注文の「牛:三頭」はさきほど来年に届くと伝えました",
     date: "2024/1/29",
   },
   {
@@ -772,7 +772,7 @@ const tankaCollection = [
     date: "2024/6/24",
   },
   {
-    text: "パート募集：静電気発生装置飼育員（未経験者歓迎）",
+    text: "パート募集:静電気発生装置飼育員（未経験者歓迎）",
     date: "2024/1/14",
   },
   {
@@ -1564,16 +1564,23 @@ const tankaCollection = [
 let currentIndex = 0;
 
 // 初期表示用の関数
-function displayInitialTanka() {
+function viewNewTanka() {
   const container = document.querySelector(".tanka-container");
 
   // 最初の短歌を選択
   currentIndex = Math.floor(Math.random() * tankaCollection.length);
 
   // 新しい短歌要素を作成
+
+  // 半角数字を <span> で囲む
+  const formattedText = tankaCollection[currentIndex].text.replace(
+    /(\d+)/g, // 連続する半角数字
+    '<span class="combine">$1</span>'
+  );
+
   const tankaElement = document.createElement("p");
   tankaElement.className = "tanka fade-in-init";
-  tankaElement.textContent = tankaCollection[currentIndex].text;
+  tankaElement.innerHTML = formattedText;
   container.appendChild(tankaElement);
 
   // リフロー
@@ -1585,8 +1592,7 @@ function displayInitialTanka() {
 
 // 切り替え用の関数
 async function switchTanka() {
-  const container = document.querySelector(".tanka-container");
-  const oldTanka = container.querySelector(".tanka");
+  const oldTanka = document.querySelector(".tanka");
 
   // 現在の短歌をフェードアウト
   oldTanka.classList.add("fade-out");
@@ -1595,28 +1601,12 @@ async function switchTanka() {
   await new Promise((resolve) => setTimeout(resolve, 500));
   oldTanka.remove();
 
-  // 新しい短歌を選択
-  let newIndex;
-  do {
-    newIndex = Math.floor(Math.random() * tankaCollection.length);
-  } while (newIndex === currentIndex && tankaCollection.length > 1);
-  currentIndex = newIndex;
-
-  // 新しい短歌要素を作成
-  const newTanka = document.createElement("p");
-  newTanka.className = "tanka fade-in-init";
-  newTanka.textContent = tankaCollection[currentIndex].text;
-  container.appendChild(newTanka);
-
-  // リフロー
-  void newTanka.offsetHeight;
-
-  // フェードイン
-  newTanka.classList.remove("fade-in-init");
+  // 次の短歌を表示
+  viewNewTanka();
 }
 
 // 初期表示
-displayInitialTanka();
+viewNewTanka();
 
 // クリック/タップで短歌を切り替え
 document.body.addEventListener("click", () => {
