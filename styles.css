@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tanka-container {
+  padding: 1rem;
+  width: 80%;
+  max-width: 400px;
+  min-width: 0;
+  height: min(90vh, 800px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.tanka {
+  font-family: "Shippori Mincho", serif;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: clamp(0.5rem, calc(2.5vh + 0.1rem), 1rem);
+  letter-spacing: clamp(0.1rem, calc(0.3vh), 0.3rem);
+  margin: 0 auto;
+  white-space: nowrap;
+  max-height: 100%;
+  opacity: 1;
+  transform: translateY(0);
+  position: absolute;
+  transition: opacity 1s ease-in-out;
+}
+
+/* フェードアウト時：下に移動しながら消える */
+.tanka.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* フェードイン初期状態：元の位置で透明 */
+.tanka.fade-in-init {
+  opacity: 0;
+  transform: translateY(0);
+}
+
+.instruction {
+  font-family: "Shippori Mincho", serif;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .tanka-container {
+    width: 90%;
+    padding: 1rem;
+    height: min(80vh, 600px);
+  }
+}
